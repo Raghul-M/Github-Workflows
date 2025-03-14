@@ -1,0 +1,13 @@
+name: Multi-Line Commands
+on: push
+
+jobs:
+  run-multiple-commands:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run multiple commands
+        run: |
+          echo "Starting multi-line script..."
+          echo "Hello from GitHub Actions!"
+          ls -lah
+          echo "Script finished."
