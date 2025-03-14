@@ -1,21 +1,23 @@
-name: Matrix Include and Exclude
+name: Docker Matrix Build
 on: push
 
 jobs:
-  test-matrix:
-    runs-on: ubuntu-latest
+  build:
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
-        python-version: [3.8, 3.10]
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        image: [hello-world]
         include:
           - os: ubuntu-latest
-            python-version: 3.12
+            image: "alpine"
         exclude:
           - os: windows-latest
-            python-version: 3.8
+            image: "alpine"  # Exclude Alpine on Windows
+
+    runs-on: ${{ matrix.os }}
 
     steps:
-      - name: Display matrix combination
+      - name: Run Docker Container
         run: |
-          echo "OS: ${{ matrix.os }}, Python: ${{ matrix.python-version }}"
+         echo "Runs on ${{ matrix.os }}"
+         docker run ${{ matrix.image }}
