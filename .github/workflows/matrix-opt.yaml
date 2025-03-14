@@ -1,23 +1,27 @@
-name: Docker Matrix Build
+name: Docker Matrix Strategy
 on: push
 
 jobs:
-  build:
+  docker-test:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest]
         image: [hello-world, busybox]
+        
+        #  Include a special case: "alpine" only on Ubuntu
         include:
           - os: ubuntu-latest
-            image: "alpine"
+            image: alpine
+
+        #  Exclude "busybox" on Windows because it's not natively supported
         exclude:
           - os: windows-latest
-            image: "alpine"  # Exclude Alpine on Windows
+            image: busybox
 
     runs-on: ${{ matrix.os }}
-    steps:
 
+    steps:
       - name: Run Docker Container
         run: |
-          echo "Runs on ${{ matrix.os }}"
+          echo "Running on ${{ matrix.os }} with Docker image: ${{ matrix.image }}"
           docker run ${{ matrix.image }}
