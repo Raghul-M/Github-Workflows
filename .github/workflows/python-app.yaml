@@ -1,0 +1,15 @@
+name: Run Python App
+on: push
+
+jobs:
+  run-app:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Check Python Version
+        run: python --version
+
+      - name: Run app
+        run: python3 app.py

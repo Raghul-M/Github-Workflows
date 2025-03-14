@@ -1,0 +1,7 @@
+print("🌟 Welcome to the Python Fun Zone! 🌟")
+print("=====================================")
+print("Here are some cool facts about Python:\n")
+print("🐍 Python was named after 'Monty Python', not the snake!")
+print("⚡ Python is used by NASA, Google, and even Instagram!")
+print("📜 The Zen of Python says: 'Simple is better than complex.'")
+print("\nThanks for visiting! Keep coding! 🚀")
