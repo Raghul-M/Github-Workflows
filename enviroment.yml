@@ -1,0 +1,27 @@
+name: Combined Debugging, Secrets, Variables, and Environment Example
+
+on: push
+
+jobs:
+  debug-secrets-env:
+    runs-on: ubuntu-latest
+    env:
+      ENV_VAR: "This is an environment variable"
+      ACTIONS_RUNNER_DEBUG: true
+      ACTIONS_STEP_DEBUG: true
+
+    steps:
+      - name: Enable Debugging
+        run: |
+          echo "Debugging Enabled"
+          echo "ACTIONS_RUNNER_DEBUG: $ACTIONS_RUNNER_DEBUG"
+          echo "ACTIONS_STEP_DEBUG: $ACTIONS_STEP_DEBUG"
+
+      - name: Access Secrets & Variables
+        run: |
+          echo "Using Secret: ${{ secrets.MY_SECRET }}"
+          echo "Using Repository Variable: ${{ vars.MY_VAR }}"
+
+      - name: Use Environment Variable
+        run:  |
+         echo "Accessing ENV_VAR: $ENV_VAR"
