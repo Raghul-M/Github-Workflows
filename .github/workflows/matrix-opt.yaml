@@ -7,19 +7,14 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest]
         image: [hello-world, busybox]
-        
-        #  Include a special case: "alpine" only on Ubuntu
         include:
           - os: ubuntu-latest
             image: alpine
-
-        #  Exclude "busybox" on Windows because it's not natively supported
         exclude:
           - os: windows-latest
             image: busybox
 
     runs-on: ${{ matrix.os }}
-
     steps:
       - name: Run Docker Container
         run: |
