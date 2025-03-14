@@ -6,7 +6,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        image: [hello-world, alpine]
+        image: [hello-world, busybox]
         include:
           - os: ubuntu-latest
             image: "alpine"
@@ -17,7 +17,15 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
+      - name: Install Docker (Windows)
+        if: runner.os == 'Windows'
+        run: choco install docker-cli
+
+      - name: Install Docker (macOS)
+        if: runner.os == 'macOS'
+        run: brew install docker
+
       - name: Run Docker Container
         run: |
-         echo "Runs on ${{ matrix.os }}"
-         docker run ${{ matrix.image }}
+          echo "Runs on ${{ matrix.os }}"
+          docker run ${{ matrix.image }}
